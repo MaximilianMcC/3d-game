@@ -24,6 +24,8 @@ class PlayerMovement : Component
 		if (State.Debug)
 		{
 			Input.ToggleBooleanWhenKeyPressed(ref Freecam, KeyboardKey.F);
+			
+			TextDrawer.DrawLine(Freecam);
 		}
 	}
 
