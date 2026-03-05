@@ -26,4 +26,25 @@ class Input
 
 	public static bool Jumping() => Raylib.IsKeyDown(KeyboardKey.Space) || Raylib.IsKeyDown(KeyboardKey.Up);
 	public static bool Debug() => Raylib.IsKeyPressed(KeyboardKey.F3) || Raylib.IsKeyPressed(KeyboardKey.Grave);
+
+	public static Vector2 GetDampenedMouseDelta()
+	{
+		//? Converts it to something a little more usable (sensitivity for the sensitivity)
+		const float mouseDampening = 0.002f;
+		return Raylib.GetMouseDelta() * mouseDampening;
+	}
+
+	public static void LockAndHideCursor()
+	{
+		Raylib.DisableCursor();
+
+		Vector2 centre = Graphics.WindowSize / 2f;
+		Raylib.SetMousePosition((int)centre.X, (int)centre.Y);
+	}
+
+	public static void UnlockAndShowCursor()
+	{
+		// Raylib.EnableCursor();
+		Raylib.ShowCursor();
+	}
 }

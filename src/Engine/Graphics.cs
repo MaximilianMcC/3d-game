@@ -4,6 +4,7 @@ using Raylib_cs;
 static class Graphics
 {
 	public static Vector2 WindowSize => new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
+	public static Vector2 GameSize;
 
 	public static Rectangle GetTextureRectangle(Texture2D texture)
 	{

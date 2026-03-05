@@ -1,7 +1,12 @@
+using System.Numerics;
+
 class GameObject
 {
 	private List<Component> components = [];
 	public IReadOnlyList<Component> Components => components;
+
+	public Vector3 Position;
+	public Rotation Rotation;
 
 	public void AddComponent(Component component)
 	{
@@ -46,6 +51,10 @@ class GameObject
 class Component
 {
 	public GameObject gameObject;
+
+	protected Vector3 Position => gameObject.Position;
+	protected Rotation Rotation => gameObject.Rotation;
+	protected Camera SceneCamera => SceneManager.Scene.Camera;
 
 	public virtual void Start() { }
 	public virtual void Update() { }

@@ -10,7 +10,7 @@ class Program
 		SceneManager.Scene = new DebugScene();
 		SceneManager.Scene.Start();
 
-		RenderTexture2D output = Raylib.LoadRenderTexture((int)State.GameSize.X, (int)State.GameSize.Y);
+		RenderTexture2D output = Raylib.LoadRenderTexture((int)Graphics.GameSize.X, (int)Graphics.GameSize.Y);
 
 		while (!Raylib.WindowShouldClose())
 		{

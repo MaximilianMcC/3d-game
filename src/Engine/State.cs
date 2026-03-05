@@ -5,16 +5,15 @@ static class State
 {
 	public static bool Debug { get; set; }
 	public static string WindowTitle { get; set; }
-	public static Vector2 GameSize;
 
 	public static void Init(string windowTitle, Vector2 size)
 	{
 		WindowTitle = windowTitle;
-		GameSize = size;
+		Graphics.GameSize = size;
 
 		Raylib.SetConfigFlags(ConfigFlags.ResizableWindow | ConfigFlags.AlwaysRunWindow);
 		Raylib.SetTraceLogLevel(TraceLogLevel.Warning);
-		Raylib.InitWindow((int)GameSize.X, (int)GameSize.Y, WindowTitle);
+		Raylib.InitWindow((int)Graphics.GameSize.X, (int)Graphics.GameSize.Y, WindowTitle);
 	}
 
 	public static void Update()
