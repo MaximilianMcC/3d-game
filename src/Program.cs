@@ -5,7 +5,8 @@ class Program
 {
 	public static void Main(string[] args)
 	{
-		State.Init("3d game", new Vector2(580, 420));
+		State.Init("3d game", new Vector2(580, 420) * 2);
+		State.Debug = true;
 
 		SceneManager.Scene = new DebugScene();
 		SceneManager.Scene.Start();

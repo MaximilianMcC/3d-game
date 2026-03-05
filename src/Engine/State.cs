@@ -3,7 +3,18 @@ using Raylib_cs;
 
 static class State
 {
-	public static bool Debug { get; set; }
+	private static bool debug;
+	public static bool Debug
+	{
+		get => debug;
+		set
+		{
+			debug = value;
+			UpdateDebugWindowTitle();
+		}
+	}
+
+
 	public static string WindowTitle { get; set; }
 
 	public static float DeltaTime { get; private set; }
@@ -29,10 +40,13 @@ static class State
 		{
 			// Toggle debug mode
 			Debug = !Debug;
-
-			// Update the window title
-			const string debugPrefix = "(debug) ";
-			Raylib.SetWindowTitle((Debug ? debugPrefix : "") + WindowTitle);
 		}
+	}
+
+	private static void UpdateDebugWindowTitle()
+	{
+		// Update the window title
+		const string debugPrefix = "(debug) ";
+		Raylib.SetWindowTitle((Debug ? debugPrefix : "") + WindowTitle);
 	}
 }

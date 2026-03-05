@@ -28,11 +28,11 @@ class Input
 	public static Vector3 Get3DMovement()
 	{
 		Vector2 movement = GetWasdMovement();
-		return new Vector3(
+		return Maths.NormaliseIfNotZero(new Vector3(
 			movement.X,
 			0f,
 			movement.Y
-		);
+		));
 	}
 
 	public static bool Jumping() => Raylib.IsKeyDown(KeyboardKey.Space) || Raylib.IsKeyDown(KeyboardKey.Up);
