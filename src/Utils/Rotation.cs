@@ -29,7 +29,7 @@ struct Rotation
 		Roll = roll;
 	}
 
-	// I did not write this, and I'm not gonna pretend I wrote this
+	// I did not write this, and I'm not gonna pretend I wrote this or understand it
 	public Rotation(Quaternion quaternion)
 	{
 		float sinPitch = 2f * (quaternion.W * quaternion.X - quaternion.Z * quaternion.Y);

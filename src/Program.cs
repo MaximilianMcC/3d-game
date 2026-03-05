@@ -23,9 +23,9 @@ class Program
 			Raylib.EndTextureMode();
 
 			Raylib.BeginDrawing();
+			TextDrawer.BeginDrawing();
 			Raylib.ClearBackground(Color.Black);
 			Graphics.DrawRenderTextureOverWholeScreen(output);
-			TextDrawer.BeginDrawing();
 			Raylib.EndDrawing();
 		}
 
