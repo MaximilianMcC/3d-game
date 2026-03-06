@@ -107,6 +107,17 @@ static class TextDrawer
 		Draw(boolean.ToString(), boolean ? Color.Green : Color.Red);
 	}
 
+	public static void DrawFps()
+	{
+		int fps = Raylib.GetFPS();
+		Color color = Color.Lime;
+		if (fps < 60) color = Color.Red;
+		if (fps < 250) color = Color.Orange;
+
+		Draw($"FPS: ", Color.SkyBlue);
+		Draw(fps, color);
+		DrawGap();
+	}
 
 	struct Text
 	{
