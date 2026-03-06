@@ -43,14 +43,15 @@ static class State
 			Debug = !Debug;
 		}
 
+		// Check for if we toggle any debug settings
+		// TODO: Do somewhere else
+		Input.ToggleBooleanWhenShortcutDone(ref ShowHitboxes, KeyboardKey.F3, KeyboardKey.B);
+
 		if (debug)
 		{
 			TextDrawer.DrawFps();
 			TextDrawer.DrawValue(ShowHitboxes);
 		}
-
-		// Check for if we toggle hitboxes
-		Input.ToggleBooleanWhenShortcutDone(ref ShowHitboxes, KeyboardKey.F3, KeyboardKey.B);
 	}
 
 	private static void UpdateDebugWindowTitle()

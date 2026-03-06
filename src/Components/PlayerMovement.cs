@@ -5,7 +5,7 @@ class PlayerMovement : Component
 {
 	private float mouseSensitivity = 30f;
 
-	private float velocity;
+	public float Velocity;
 	private float maxSpeed = 15f;
 	private float acceleration = 120f;
 	private float deceleration = 60f;
@@ -26,13 +26,8 @@ class PlayerMovement : Component
 		LookAround();
 		MoveAround();
 
-		// If we're debugging and press f move into freecam
-		if (State.Debug)
-		{
-			Input.ToggleBooleanWhenKeyPressed(ref Freecam, KeyboardKey.F);
-			
-			TextDrawer.DrawValue(Freecam);
-		}
+		Input.ToggleBooleanWhenShortcutDone(ref Freecam, KeyboardKey.F3, KeyboardKey.F);
+		TextDrawer.DrawValue(Freecam);
 	}
 
 	private void LookAround()
@@ -63,15 +58,15 @@ class PlayerMovement : Component
 	private void CalculateSpeed(bool movingRn)
 	{
 		// If we're moving then accelerate, otherwise decelerate
-		velocity += (movingRn ? acceleration : -deceleration) * State.DeltaTime;
+		Velocity += (movingRn ? acceleration : -deceleration) * State.DeltaTime;
 
 		// Ensure we do not decelerate 'backwards'
-		velocity = Maths.ClampAtZero(velocity);
+		Velocity = Maths.ClampAtZero(Velocity);
 
 		// Ensure we do not go too fast
-		if (velocity > maxSpeed) velocity = maxSpeed;
+		if (Velocity > maxSpeed) Velocity = maxSpeed;
 
-		TextDrawer.DrawValue(velocity);
+		TextDrawer.DrawValue(Velocity);
 	}
 
 	private void MoveAround()
@@ -97,7 +92,7 @@ class PlayerMovement : Component
 		CalculateSpeed(moving);
 
 		// Move
-		newPosition += movementDirection * velocity * State.DeltaTime;
+		newPosition += movementDirection * Velocity * State.DeltaTime;
 
 		// Set our position
 		gameObject.Position = newPosition;
