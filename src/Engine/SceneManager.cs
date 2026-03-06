@@ -8,11 +8,21 @@ static class SceneManager
 
 abstract class Scene
 {
-	public List<GameObject> GameObjects = [];
+	//? Earth
+	public float Gravity = -9.81f;
+
+	private List<GameObject> gameObjects = [];
+	public IReadOnlyList<GameObject> GameObjects => gameObjects;
 	public Camera Camera;
 
 	// TODO: maybe don't do this
 	public abstract void Populate();
+
+	public void Spawn(GameObject gameObject)
+	{
+		gameObjects.Add(gameObject);
+		gameObject.Start();
+	}
 
 	public void Start()
 	{

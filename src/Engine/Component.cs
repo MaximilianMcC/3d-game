@@ -8,6 +8,14 @@ class GameObject
 	public Vector3 Position;
 	public Rotation Rotation;
 
+	public GameObject(params List<Component> initialComponents)
+	{
+		foreach (Component component in initialComponents)
+		{
+			AddComponent(component);
+		}
+	}
+
 	public void AddComponent(Component component)
 	{
 		// Set our parent
