@@ -1,7 +1,7 @@
 using System.Numerics;
 using Raylib_cs;
 
-class Input
+static class Input
 {
 	// Side to side stuff
 	public static Vector2 GetSidewaysMovement()
@@ -11,6 +11,7 @@ class Input
 		if (Raylib.IsKeyDown(KeyboardKey.D) || Raylib.IsKeyDown(KeyboardKey.Right)) movement.X++;
 		return movement;
 	}
+
 
 	// WASD
 	// TODO: Make vector3
@@ -62,5 +63,15 @@ class Input
 	public static void ToggleBooleanWhenKeyPressed(ref bool value, KeyboardKey key)
 	{
 		if (Raylib.IsKeyPressed(key)) value = !value;
+	}
+	
+	public static void ToggleBooleanWhenShortcutDone(ref bool value, KeyboardKey first, KeyboardKey second)
+	{
+		if (ShortcutDone(first, second)) value = !value;
+	}
+
+	public static bool ShortcutDone(KeyboardKey first, KeyboardKey second)
+	{
+		return (Raylib.IsKeyDown(first) && (Raylib.IsKeyPressed(second) || Raylib.IsKeyPressedRepeat(second)));
 	}
 }

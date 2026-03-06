@@ -23,13 +23,14 @@ class Grenade : Component
 		// Apply gravity
 		velocity.Y += SceneManager.Scene.Gravity * State.DeltaTime;
 
-		// Add air resistance to like slow it down
+		// Add air resistance to slow it down
 		velocity -= velocity * airResistance * State.DeltaTime;
 
-		// Apply the movement
-		gameObject.Position += velocity * State.DeltaTime;
-
-		// Spin it
+		// Apply the movement and spin it in a cool looking way
+		// gameObject.Position += velocity * State.DeltaTime;
 		gameObject.Rotation += (new Rotation(200f, 30f, 45f) * 3) * State.DeltaTime;
+
+		//! debug
+		if (gameObject.Position.Y > 0) gameObject.Position += velocity * State.DeltaTime;
 	}
 }

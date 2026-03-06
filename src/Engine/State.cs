@@ -3,6 +3,7 @@ using Raylib_cs;
 
 static class State
 {
+	public static bool ShowHitboxes;
 	private static bool debug;
 	public static bool Debug
 	{
@@ -41,6 +42,15 @@ static class State
 			// Toggle debug mode
 			Debug = !Debug;
 		}
+
+		if (debug)
+		{
+			TextDrawer.DrawFps();
+			TextDrawer.DrawValue(ShowHitboxes);
+		}
+
+		// Check for if we toggle hitboxes
+		Input.ToggleBooleanWhenShortcutDone(ref ShowHitboxes, KeyboardKey.F3, KeyboardKey.B);
 	}
 
 	private static void UpdateDebugWindowTitle()

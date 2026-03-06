@@ -12,6 +12,7 @@ class WeaponHandler : Component
 			grenade.AddComponent(new ModelRenderer());
 			Grenade grenadeGrenade = new Grenade();
 			grenade.AddComponent(grenadeGrenade);
+			grenade.AddComponent(new SphereCollider(1));
 			grenadeGrenade.Spawn(SceneCamera.Position, SceneCamera.Rotation, 20f);
 
 			// Spawn the grenade

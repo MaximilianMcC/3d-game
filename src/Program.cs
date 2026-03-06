@@ -16,6 +16,7 @@ class Program
 		while (!Raylib.WindowShouldClose())
 		{
 			State.Update();
+			CollisionHandler.Update();
 			SceneManager.Scene.Update();
 
 			Raylib.BeginTextureMode(output);

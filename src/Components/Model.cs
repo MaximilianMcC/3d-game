@@ -16,7 +16,7 @@ class ModelRenderer : Component
 		Matrix4x4 rotation = Matrix4x4.CreateFromQuaternion(Rotation.AsQuaternion);
 		model.Transform = rotation;
 
-		Raylib.DrawModel(model, Position, 5f, Color.White);
+		Raylib.DrawModel(model, Position, 1f, Color.White);
 	}
 
 	public override void CleanUp()
