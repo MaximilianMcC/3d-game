@@ -43,4 +43,71 @@ struct Rotation
 		float cosRoll = 1f - 2f * (quaternion.X * quaternion.X + quaternion.Z * quaternion.Z);
 		Roll = Maths.RadiansToDegrees(MathF.Atan2(sinRoll, cosRoll));
 	}
+
+	public static Rotation operator +(Rotation left, Rotation right)
+	{
+		return new Rotation(
+			left.Yaw + right.Yaw,
+			left.Pitch + right.Pitch,
+			left.Roll + right.Roll
+		);
+	}
+
+	public static Rotation operator -(Rotation left, Rotation right)
+	{
+		return new Rotation(
+			left.Yaw - right.Yaw,
+			left.Pitch - right.Pitch,
+			left.Roll - right.Roll
+		);
+	}
+
+	public static Rotation operator *(Rotation left, Rotation right)
+	{
+		return new Rotation(
+			left.Yaw * right.Yaw,
+			left.Pitch * right.Pitch,
+			left.Roll * right.Roll
+		);
+	}
+
+	public static Rotation operator /(Rotation left, Rotation right)
+	{
+		return new Rotation(
+			left.Yaw / right.Yaw,
+			left.Pitch / right.Pitch,
+			left.Roll / right.Roll
+		);
+	}
+
+	public static Rotation operator *(Rotation rotation, float multiplier)
+	{
+		return new Rotation(
+			rotation.Yaw * multiplier,
+			rotation.Pitch * multiplier,
+			rotation.Roll * multiplier
+		);
+	}
+
+	public static Rotation operator *(float multiplier, Rotation rotation)
+	{
+		return new Rotation(
+			rotation.Yaw * multiplier,
+			rotation.Pitch * multiplier,
+			rotation.Roll * multiplier
+		);
+	}
+
+	public static Rotation operator /(Rotation rotation, float multiplier)
+	{
+		if (multiplier == 0) throw new DivideByZeroException("idiot");
+
+		return new Rotation(
+			rotation.Yaw / multiplier,
+			rotation.Pitch / multiplier,
+			rotation.Roll / multiplier
+		);
+	}
+
+	public override readonly string ToString() => $"<{Yaw}, {Pitch}, {Roll}>";
 }
