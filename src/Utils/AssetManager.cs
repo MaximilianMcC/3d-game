@@ -1,6 +1,9 @@
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Raylib_cs;
 
+// TODO: Maybe just don't do any of this and just load the whole asset
+// TODO: Directory into a temporary directory somewhere hidden 
 class AssetManager
 {
 	private static readonly string Namespace = "3DGame";
@@ -11,10 +14,10 @@ class AssetManager
 		// so we can extract the assets and whatnot
 		Assembly assembly = Assembly.GetExecutingAssembly();
 
-		// Get the path to the asset and its file extension
-		assetPath = assetPath.Replace("./", "").Replace("/", ".");
-		string path = $"{Namespace}.{assetPath}";
-		extension = Path.GetExtension(assetPath);
+    	// Clean and format the asset path for embedded resources
+    	assetPath = assetPath.TrimStart('.', '/', '\\').Replace("/", ".").Replace("\\", ".");
+    	string path = $"{Namespace}.{assetPath}";
+    	extension = Path.GetExtension(assetPath);
 
 		// Get the stream containing the assets data
 		using (Stream stream = assembly.GetManifestResourceStream(path))
@@ -38,6 +41,52 @@ class AssetManager
 			}
 		}
 
+	}
+
+	private static string GetAssetAsTempFile(string assetPath, bool useOriginalName = false)
+	{
+		// Get the asset byte array and extension
+		byte[] bytes = GetAssetBytes(assetPath, out string extension);
+
+		// Make a new temporary file, and rename it to
+		// have the correct file extension
+		string tempFilepath;
+		if (useOriginalName)
+		{
+			// Make a temporary file in the temp directory with the
+			// same filename as the original file we're tryna get
+			tempFilepath = Path.Join(Path.GetTempPath(), Path.GetFileName(assetPath));
+		}
+		else
+		{
+			// Make a new temp file, and change the extension
+			// to match the file that we're tryna open/use
+			tempFilepath = Path.GetTempFileName();
+			tempFilepath = Path.ChangeExtension(tempFilepath, extension);
+		}
+
+		// Write all of the bytes to the file
+		File.WriteAllBytes(tempFilepath, bytes);
+
+		// Return the path of the temporary file
+		return tempFilepath;
+	}
+
+	private static string CreateAssetAsTempFileInDirectory(string assetPath, string directoryPath)
+	{
+		// Get the asset byte array and extension
+		byte[] bytes = GetAssetBytes(assetPath, out string extension);
+
+		// Get the path where the temp file
+		// will be created
+		string path = Path.Join(directoryPath, Path.GetFileName(assetPath));
+
+		// Create the file at the path
+		File.WriteAllBytes(path, bytes);
+
+		// Give them back the path to the file
+		// that they just created
+		return path;
 	}
 
 	public static Image LoadImage(string path)
@@ -110,8 +159,22 @@ class AssetManager
 		return font;
 	}
 
+	public static Model LoadGlbModel(string path)
+	{
+		// Get the path to both the model, and the material file
+		string modelPath = GetAssetAsTempFile(path);
+
+		// Actually load the model
+		Model model = Raylib.LoadModel(modelPath);
+
+		// Get rid of the temporary file we just made
+		File.Delete(modelPath);
+
+		// Give back the loaded model
+		return model;
+	}
+
 	//! Debug
-	// TODO: Make it so you can press a button and it will show this or something (debug)
 	public static void PrintEmbeddedAssets()
 	{
 		// Get all of the assets that are embedded rn
@@ -120,6 +183,7 @@ class AssetManager
 		
 		// Print them all
 		Console.WriteLine("All embedded assets:");
-		foreach (string asset in assets) Console.WriteLine(asset);
+		foreach (string asset in assets) Console.WriteLine("- " + asset);
+		Console.WriteLine();
 	}
 }
