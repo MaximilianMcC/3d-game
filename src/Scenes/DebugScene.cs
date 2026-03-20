@@ -9,8 +9,10 @@ class DebugScene : Scene
 			new WeaponHandler()
 		));
 
+		// Floor
 		Spawn(new GameObject(
 			new Grid()
 		));
+
 	}
 }

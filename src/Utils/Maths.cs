@@ -33,4 +33,10 @@ static class Maths
 		return Vector3.Normalize(vector);
 	}
 
+	// Convert a vector3 to a vector2 by ignoring the Y (X and Z)
+	public static Vector2 Vector3ToVector2(Vector3 vector3)
+	{
+		return new Vector2(vector3.X, vector3.Z);
+	}
+
 }

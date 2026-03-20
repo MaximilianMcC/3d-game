@@ -27,10 +27,7 @@ class Grenade : Component
 		velocity -= velocity * airResistance * State.DeltaTime;
 
 		// Apply the movement and spin it in a cool looking way
-		// gameObject.Position += velocity * State.DeltaTime;
+		gameObject.Position += velocity * State.DeltaTime;
 		gameObject.Rotation += (new Rotation(200f, 30f, 45f) * 3) * State.DeltaTime;
-
-		//! debug
-		if (gameObject.Position.Y > 0) gameObject.Position += velocity * State.DeltaTime;
 	}
 }
