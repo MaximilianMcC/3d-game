@@ -14,7 +14,7 @@ class WeaponHandler : Component
 
 			// Create a new grenade
 			GameObject grenade = new GameObject();
-			grenade.AddComponent(new ModelRenderer());
+			grenade.AddComponent(new ModelRenderer("./assets/grenade.glb"));
 			Grenade grenadeGrenade = new Grenade();
 			grenade.AddComponent(grenadeGrenade);
 			grenade.AddComponent(new SphereCollider(0.3f));

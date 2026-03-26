@@ -23,6 +23,11 @@ class GameObject
 		components.Add(component);
 	}
 
+	public T GetComponent<T>() where T : Component
+	{
+		return components.OfType<T>().FirstOrDefault();
+	}
+
 	public void Start()
 	{
 		for (int i = 0; i < Components.Count; i++)

@@ -4,10 +4,17 @@ using Raylib_cs;
 class Grid : Component
 {
 	private Vector3 size = new Vector3(10, 1, 10);
+	private Mesh plane;
+	private Material material;
 
 	public override void Start()
 	{
-		gameObject.AddComponent(new BoxCollider(size));
+		// gameObject.AddComponent(new BoxCollider(size));
+
+		plane = Raylib.GenMeshPlane(10, 10, 1, 1);
+
+		material = Raylib.LoadMaterialDefault();
+		Raylib.SetMaterialTexture(ref material, MaterialMapIndex.Albedo, AssetManager.LoadTexture("./assets/test.png"));
 	}
 
 	public override void Update()
@@ -17,6 +24,6 @@ class Grid : Component
 
 	public override void Draw()
 	{
-		Raylib.DrawPlane(Position, Maths.Vector3ToVector2(size), Color.White);		
+		Raylib.DrawMesh(plane, material, Matrix4x4.Identity);
 	}
 }

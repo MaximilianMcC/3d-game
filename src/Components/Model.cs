@@ -1,15 +1,9 @@
 using System.Numerics;
 using Raylib_cs;
 
-class ModelRenderer : Component
+class ModelRenderer(string modelPath) : Component
 {
-	private Model model;
-
-	public override void Start()
-	{
-		// Load the model
-		model = AssetManager.LoadGlbModel("./assets/grenade.glb");
-	}
+	private Model model = AssetManager.LoadGlbModel(modelPath);
 
 	public override void Draw()
 	{
