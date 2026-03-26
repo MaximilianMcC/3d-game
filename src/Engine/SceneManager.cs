@@ -29,12 +29,8 @@ abstract class Scene
 		// Make a default camera for if we forget one
 		Camera = new Camera();
 
+		// Spawn everything into the world
 		Populate();
-
-		for (int i = 0; i < GameObjects.Count; i++)
-		{
-			GameObjects[i].Start();
-		}
 	}
 
 	public void Update()
@@ -60,7 +56,7 @@ abstract class Scene
 		foreach (GameObject gameObject in GameObjects)
 		{
 			gameObject.CleanUp();
-		}	
+		}
 	}
 
 	public T Get<T>() => GameObjects.OfType<T>().FirstOrDefault();
