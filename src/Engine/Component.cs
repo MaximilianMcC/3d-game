@@ -65,8 +65,20 @@ class Component
 {
 	public GameObject gameObject;
 
-	protected Vector3 Position => gameObject.Position;
-	protected Rotation Rotation => gameObject.Rotation;
+	// protected Vector3 Position => gameObject.Position;
+	protected Vector3 Position
+	{
+		get => gameObject.Position;
+		set => gameObject.Position = value;
+	}
+
+	// protected Rotation Rotation => gameObject.Rotation;
+	protected Rotation Rotation
+	{
+		get => gameObject.Rotation;
+		set => gameObject.Rotation = value;
+	}
+
 	protected Camera SceneCamera => SceneManager.Scene.Camera;
 
 	public virtual void Start() { }
